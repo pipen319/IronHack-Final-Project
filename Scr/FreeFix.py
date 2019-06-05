@@ -290,10 +290,18 @@ def check_similarity(movieId):
 
 movie_user_wants = input('Enter a movie: ')
 
+from fuzzywuzzy import fuzz
+from fuzzywuzzy import process
+
+def movie(x):
+    movies = list(df_movies_final['title'])
+    for movie in movies:
+        if fuzz.partial_ratio(x,movie) == 100:
+            x = movie
+    return x
 
 
-
-result = df_movies_final.loc[df_movies_final['title'] == movie_user_wants]
+result = df_movies_final.loc[df_movies_final['title'] == movie(movie_user_wants)]
 movie__id__= int(result['movieId'])
 
 similarityResult1  = check_similarity(movie__id__)
