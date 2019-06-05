@@ -29,10 +29,10 @@ import json
 
 
 
-df_ratings = pd.read_csv("ratings.csv")
-df_links = pd.read_csv("links.csv")
-df_tags = pd.read_csv("tags.csv")
-df_movies = pd.read_csv("movies.csv")
+df_ratings = pd.read_csv("../Input/ratings.csv")
+df_links = pd.read_csv("../Input/links.csv")
+df_tags = pd.read_csv("../Input/tags.csv")
+df_movies = pd.read_csv("../Input/movies.csv")
 
 
 
