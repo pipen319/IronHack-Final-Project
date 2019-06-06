@@ -117,6 +117,7 @@ for index, x in df_tags.iterrows():
                     tags_dict[movieId].append(y)
             else:
                 tags_dict[movieId] = [y]
+df_tags.apply(lambda x: str(x['tag']).split(' '), axis=1)
 
 title_words_dict = {}
 for index, x in df_movies.iterrows():
@@ -196,20 +197,16 @@ movie_user_wants = input('Enter a movie: ')
 def movie(x):
     movies = list(df_movies_final['title'])
     for movie in movies:
-        if fuzz.partial_ratio(x,movie) > 90:
+        if fuzz.partial_ratio(x,movie) == 100:
             x = movie
-            return x
-        else:
-            x = 'Nada'
-            return x
+    return x
+        
 
-if movie(movie_user_wants) != 'Nada':
-    result = df_movies_final.loc[df_movies_final['title'] == movie(movie_user_wants)]
-    movie__id__= int(result['movieId'])
-    similarityResult1  = check_similarity(movie__id__)
-    print('-//----------------------------------------------PELICULA ELEGIDA---------------------------------------------------//-'+'\n')
-    print(movie(movie_user_wants))
-    print('-//------------------------------------------PELICULAS RECOMENDADAS-------------------------------------------------//-'+'\n')
-    print(similarityResult1.head())
-else: 
-    print('No se ha encontrado película')
+
+result = df_movies_final.loc[df_movies_final['title'] == movie(movie_user_wants)]
+movie__id__= int(result['movieId'])
+similarityResult1  = check_similarity(movie__id__)
+print('-//----------------------------------------------PELICULA ELEGIDA---------------------------------------------------//-'+'\n')
+print(movie(movie_user_wants))
+print('-//------------------------------------------PELICULAS RECOMENDADAS-------------------------------------------------//-'+'\n')
+print(similarityResult1.head())
